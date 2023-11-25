@@ -15,9 +15,9 @@ It does **not** check CRL for revoked certificates.
 
 We will cover an example setup which works for `Ubuntu Server 22.04`.
 
-1. Copy application to designated server's `/opt/mutualTLS/mutualTLS-proxy/` folder. 
+1. Copy application to designated server's `/opt/mutualTLS/` folder. Rename the binary to `mutualTLS-proxy`.
  
-2. Crate service file at `/etc/systemd/system/mutualTLS-proxy.service` with following service config:
+2. Create service file at `/etc/systemd/system/mutualTLS-proxy.service` with following service config:
 
 ```
 [Service]
@@ -78,11 +78,10 @@ Additionally, file system logs are available at: `/var/log/mutualTLS-proxy`
 
 #### Adding New Client Certificates To Trust Store
 
-**Note:** Trusted client CAs are expected to be in `/opt/mutualTLS/clientCAs`.
+**Note:** Trusted client CAs are expected to be in directory defined by `DIR_CLIENT_CA_FILES` environment variable. 
 
-1. Assuming new partner's name is `partnerX` and you are adding the certificate in the year `2024`, you should create a new folder named `2024_partnerX`.
+1. Assuming new client's name is `clientX` and you are adding the certificate in the year `2024`, you should create a new folder named `2024_clientX`.
 
-2. Put client CAs under `/opt/mutualTLS/clientCAs/2024_parnerX`.
+2. Put client CAs under `/opt/mutualTLS/clientCAs/2024_clientX`.
 
 3. Restart **mutualTLS-proxy** service by executing: `sudo systemctl restart mutualTLS-proxy.service`
-
