@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Update this value manually to embed it into binary.
+DECLARED_VERSION="0.4.0"
+
 git diff --quiet HEAD
 code=$?
 
@@ -23,7 +26,7 @@ if [ "$code" != "0" ]; then
 fi
 
 # shellcheck disable=SC2016
-interpolator "$REPO_ROOT/program/embed.go" ':=' 'stamp_commit_hash\s+=\s+"\${commit_hash}":=stamp_commit_hash = '\""$COMMIT_HASH"\"
+interpolator "$REPO_ROOT/program/embed.go" ':=' 'stamp_build_version\s+=\s+"\${build_version}":=stamp_build_version = '\""$DECLARED_VERSION"\"
 code=$?
 if [ "$code" != "0" ]; then
     echo "Error: Attempt to run interpolator exited with code: $code."

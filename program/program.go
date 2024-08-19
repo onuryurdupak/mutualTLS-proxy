@@ -149,7 +149,7 @@ func Main(args []string) {
 		func(ctx context.Context, err error) {
 			proxySessionID := contextManager.ExtractSessionID(ctx)
 			logger := gmlog.NewLogger("ProxyClient", proxySessionID)
-			logger.Errorf(err.Error())
+			logger.Errorf("%s", err.Error())
 		}, nil, nil)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
